@@ -15,6 +15,7 @@ group :development, :test do
   gem 'pry'
   gem 'capybara'
   gem 'shoulda-matchers'
+  gem 'simplecov'
   gem 'launchy'
   gem 'factory_bot'
   gem 'faker'
