@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Market, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "relationships" do
+    it { should have_many :market_products }
+    it { should have_many(:products).through(:market_products) }
+  end
 end
