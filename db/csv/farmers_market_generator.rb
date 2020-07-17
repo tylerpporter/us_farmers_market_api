@@ -1,8 +1,8 @@
 require 'csv'
 
 class FarmersMarketGenerator
-  def initialize
-    @csv = File.open('db/csv/markets.csv')
+  def initialize(csv)
+    @csv = csv
   end
 
   def import
