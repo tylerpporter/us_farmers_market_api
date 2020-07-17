@@ -7,6 +7,6 @@ describe 'model_manager' do
 
     expect(Market.all.size).to eq(50)
     expect(Product.all.size).to eq(30)
-    expect(Market.all.sample.products).not_to be_empty
+    expect(MarketProduct.all).not_to be_empty
   end
 end
