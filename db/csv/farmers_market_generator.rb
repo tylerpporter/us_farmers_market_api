@@ -85,8 +85,8 @@ class FarmersMarketGenerator
       season1time: csv_market[:season1time],
       season2date: csv_market[:season2date],
       season2time: csv_market[:season2time],
-      lat: csv_market[:y],
-      lng: csv_market[:x]
+      latitude: csv_market[:y],
+      longitude: csv_market[:x]
     }
   end
 end

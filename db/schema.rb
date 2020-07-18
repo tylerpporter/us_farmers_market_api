@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_17_022709) do
+ActiveRecord::Schema.define(version: 2020_07_18_135101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 2020_07_17_022709) do
     t.string "season1time"
     t.string "season2date"
     t.string "season2time"
-    t.string "lat"
-    t.string "lng"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "products", force: :cascade do |t|

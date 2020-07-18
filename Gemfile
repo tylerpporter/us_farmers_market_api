@@ -8,6 +8,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'graphql'
 gem 'faraday'
 gem 'figaro'
+gem 'geocoder'
+
 
 
 group :development, :test do
