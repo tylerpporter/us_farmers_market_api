@@ -48,6 +48,6 @@ describe "Market Queries" do
     markets = JSON.parse(response.body, symbolize_names: true)
 
     expect(markets[:data][:marketsByLocation][0][:distance]).to eq(0.0)
-    expect(markets[:data][:marketsByLocation].last[:distance]).to eq(268.6153907821728)
+    expect(markets[:data][:marketsByLocation].last[:distance].round(2)).to eq(268.62)
   end
 end
