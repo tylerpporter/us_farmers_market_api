@@ -38,7 +38,7 @@ describe "Market Queries" do
   it 'can return markets near a given lat,lng' do
     post('/', params: { query: 'query { marketsByLocation(lat: 44.411037, lng: -72.140335, radius: 280) { marketname fmid distance } }'})
     markets = JSON.parse(response.body, symbolize_names: true)
-    
+
     expect(markets[:data][:marketsByLocation].size).to eq(10)
     expect(markets[:data][:marketsByLocation][0][:fmid]).to eq(1018261)
   end
@@ -48,5 +48,6 @@ describe "Market Queries" do
     markets = JSON.parse(response.body, symbolize_names: true)
 
     expect(markets[:data][:marketsByLocation][0][:distance]).to eq(0.0)
+    expect(markets[:data][:marketsByLocation].last[:distance]).to eq(268.6153907821728)
   end
 end
