@@ -14,8 +14,8 @@ module Types
     field :season1time, String, null: true
     field :season2date, String, null: true
     field :season2time, String, null: true
-    field :lat, String, null: true
-    field :lng, String, null: true
+    field :latitude, Float, null: true
+    field :longitude, Float, null: true
     field :products, [Types::ProductType], null: false
   end
 end
