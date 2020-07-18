@@ -17,5 +17,6 @@ module Types
     field :latitude, Float, null: true
     field :longitude, Float, null: true
     field :products, [Types::ProductType], null: false
+    field :distance, Float, null: true
   end
 end
