@@ -35,11 +35,11 @@ describe "Market Queries" do
     expect(market[:products].count).to eql(21)
   end
 
-  xit 'can return markets near a given lat,lng' do
-    post('/', params: { query: 'query { marketsByLocation(lat: 44.411037, lng: -72.140335, radius: 280) { marketname } }'})
+  it 'can return markets near a given lat,lng' do
+    post('/', params: { query: 'query { marketsByLocation(lat: 44.411037, lng: -72.140335, radius: 280) { marketname fmid } }'})
     markets = JSON.parse(response.body, symbolize_names: true)
 
     expect(markets[:data][:marketsByLocation].size).to eq(10)
-    expect(markets[:data][:marketsByLocation][0][:fmid]).to eq(1009845)
+    expect(markets[:data][:marketsByLocation][0][:fmid]).to eq(1018261)
   end
 end
