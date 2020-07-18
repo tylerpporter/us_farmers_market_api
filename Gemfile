@@ -9,11 +9,6 @@ gem 'graphql'
 gem 'faraday'
 gem 'figaro'
 gem 'geocoder'
-gem 'sass-rails'
-gem 'uglifier'
-gem 'coffee-rails'
-
-
 
 group :development, :test do
   gem 'rspec-rails'
