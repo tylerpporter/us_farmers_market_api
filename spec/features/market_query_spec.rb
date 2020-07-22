@@ -36,18 +36,24 @@ describe "Market Queries" do
   end
 
   it 'can return markets near a given lat,lng' do
-    post('/', params: { query: 'query { marketsByLocation(lat: 44.411037, lng: -72.140335, radius: 280) { marketname fmid distance } }'})
+    post('/', params: { query: 'query { marketsByLocation(lat: 44.411037, lng: -72.140335, radius: 280) { markets { marketname fmid distance } } }'})
     markets = JSON.parse(response.body, symbolize_names: true)
 
-    expect(markets[:data][:marketsByLocation].size).to eq(10)
-    expect(markets[:data][:marketsByLocation][0][:fmid]).to eq(1018261)
+    expect(markets[:data][:marketsByLocation][:markets].size).to eq(10)
+    expect(markets[:data][:marketsByLocation][:markets][0][:fmid]).to eq(1018261)
   end
 
   it 'can return markets distance away from a given lat, lng' do
-    post('/', params: { query: 'query { marketsByLocation(lat: 44.411037, lng: -72.140335, radius: 280) { marketname fmid  distance } }'})
+    post('/', params: { query: 'query { marketsByLocation(lat: 44.411037, lng: -72.140335, radius: 280) { markets { marketname fmid  distance } } }'})
     markets = JSON.parse(response.body, symbolize_names: true)
 
-    expect(markets[:data][:marketsByLocation][0][:distance]).to eq(0.0)
-    expect(markets[:data][:marketsByLocation].last[:distance].round(2)).to eq(268.62)
+    expect(markets[:data][:marketsByLocation][:markets][0][:distance]).to eq(0.0)
+    expect(markets[:data][:marketsByLocation][:markets].last[:distance].round(2)).to eq(268.62)
+  end
+  it 'can return city and state for given lat and lng' do
+    post('/', params: { query: 'query { marketsByLocation(lat: 44.411037, lng: -72.140335, radius: 280) { markets { marketname fmid distance } location } }'})
+    markets = JSON.parse(response.body, symbolize_names: true)
+# require "pry"; binding.pry
+    expect(markets[:data][:marketsByLocation][:location]).to eq('Danville, Vermont')
   end
 end
