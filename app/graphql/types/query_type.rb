@@ -17,9 +17,16 @@ module Types
       argument :lat, Float, required: true
       argument :lng, Float, required: true
       argument :radius, Integer, required: true
+      argument :products, [GraphQL::Types::String], required: false
     end
-    def markets_by_location(lat:, lng:, radius:)
+    def markets_by_location(lat:, lng:, radius:, products: '')
       markets = Market.near([lat, lng], radius)
+      if !products.empty?
+        markets = markets.joins(:products)
+                         .where(products: { name: products })
+                         .group('markets.id')
+                         .having('count(distinct products.id) = ?', products.size)
+      end
       location_object = Geocoder.search([lat, lng]).first
       location = location_object.city + ', ' + location_object.state
       { markets: markets,
