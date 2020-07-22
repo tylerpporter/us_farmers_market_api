@@ -53,7 +53,16 @@ describe "Market Queries" do
   it 'can return city and state for given lat and lng' do
     post('/', params: { query: 'query { marketsByLocation(lat: 44.411037, lng: -72.140335, radius: 280) { markets { marketname fmid distance } location } }'})
     markets = JSON.parse(response.body, symbolize_names: true)
-# require "pry"; binding.pry
+
     expect(markets[:data][:marketsByLocation][:location]).to eq('Danville, Vermont')
+  end
+  it 'can filter marketsByLocation by products' do
+    post('/', params: { query: 'query { marketsByLocation(lat: 44.411037, lng: -72.140335, radius: 280, products: ["bakedgoods", "fruits", "cheese", "flowers", "eggs", "seafood"]) { markets { marketname fmid distance products { name } } } }'})
+    markets = JSON.parse(response.body, symbolize_names: true)
+
+    expect(markets[:data][:marketsByLocation][:markets].size).to eq(2)
+    expect(markets[:data][:marketsByLocation][:markets].first[:fmid]).to eq(1016782)
+    expect(markets[:data][:marketsByLocation][:markets].last[:fmid]).to eq(1000061)
+    expect(markets[:data][:marketsByLocation][:markets].sample[:products].map(&:values).flatten).to include("bakedgoods", "fruits", "cheese", "flowers", "eggs", "seafood")
   end
 end
