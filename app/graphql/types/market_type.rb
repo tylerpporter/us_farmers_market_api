@@ -18,6 +18,7 @@ module Types
     field :longitude, Float, null: true
     field :products, [Types::ProductType], null: false
     field :distance, Float, null: true
-    field :closest_date, String, null: true 
+    field :closest_date, String, null: true
+    field :season_dates, String, null: false
   end
 end
