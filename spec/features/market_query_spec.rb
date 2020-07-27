@@ -74,12 +74,19 @@ describe "Market Queries" do
     expect(markets[:data][:marketsByCity][:latitude]).to eq(39.7589478)
     expect(markets[:data][:marketsByCity][:longitude]).to eq(-84.1916069)
   end
-  it 'can filterMarketsByCity by products' do
+  it 'can filter MarketsByCity by products' do
     post('/', params: { query: 'query { marketsByCity(city: "Dayton", state: "Ohio", radius: 200, products: ["bakedgoods", "fruits"]) { markets { marketname products { name } } } }'})
     markets = JSON.parse(response.body, symbolize_names: true)
 
     expect(markets[:data][:marketsByCity][:markets].size).to eq(3)
     expect(markets[:data][:marketsByCity][:markets].first[:marketname]).to eq("2nd Street Market - Five Rivers MetroPark")
     expect(markets[:data][:marketsByCity][:markets].sample[:products].map(&:values).flatten).to include("bakedgoods", "fruits")
+  end
+  it 'can filter MarketsByCoords by date' do
+    post('/', params: { query: 'query { marketsByDate(date: "8/01/2020") { marketname closestDate season1date season1time } }'})
+    markets = JSON.parse(response.body, symbolize_names: true)
+
+    expect(markets[:data][:marketsByDate].first[:closestDate]).to eq('August 01, 2020')
+    expect(markets[:data][:marketsByDate].last[:closestDate]).to eq('August 07, 2020')
   end
 end
