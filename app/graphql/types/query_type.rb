@@ -57,5 +57,13 @@ module Types
         longitude: coords.last
       }
     end
+
+    # Return markets by date
+    field :markets_by_date, [Types::MarketType], null: false do
+      argument :date, String, required: true
+    end
+    def markets_by_date(date:)
+      Market.order_by_closest_date(date)
+    end
   end
 end
