@@ -74,12 +74,47 @@ describe "Market Queries" do
     expect(markets[:data][:marketsByCity][:latitude]).to eq(39.7589478)
     expect(markets[:data][:marketsByCity][:longitude]).to eq(-84.1916069)
   end
-  it 'can filterMarketsByCity by products' do
+  it 'can filter MarketsByCity by products' do
     post('/', params: { query: 'query { marketsByCity(city: "Dayton", state: "Ohio", radius: 200, products: ["bakedgoods", "fruits"]) { markets { marketname products { name } } } }'})
     markets = JSON.parse(response.body, symbolize_names: true)
 
     expect(markets[:data][:marketsByCity][:markets].size).to eq(3)
     expect(markets[:data][:marketsByCity][:markets].first[:marketname]).to eq("2nd Street Market - Five Rivers MetroPark")
     expect(markets[:data][:marketsByCity][:markets].sample[:products].map(&:values).flatten).to include("bakedgoods", "fruits")
+  end
+  it 'can filter markets by date' do
+    post('/', params: { query: 'query { marketsByDate(date: "8/01/2020") { marketname closestDate season1date season1time } }'})
+    markets = JSON.parse(response.body, symbolize_names: true)
+
+    expect(markets[:data][:marketsByDate].first[:closestDate]).to eq('August 01, 2020')
+    expect(markets[:data][:marketsByDate].last[:closestDate]).to eq('August 07, 2020')
+  end
+
+  it 'can filter MarketsByCoords by date' do
+    post('/', params: { query: 'query { marketsByCoords(lat: 44.411037, lng: -72.140335, radius: 280, date: "8/01/2020") { markets { marketname distance closestDate } } }'})
+    markets = JSON.parse(response.body, symbolize_names: true)
+
+    expect(markets[:data][:marketsByCoords][:markets].size).to eq(9)
+    expect(markets[:data][:marketsByCoords][:markets][0][:closestDate]).to eq('August 01, 2020')
+    expect(markets[:data][:marketsByCoords][:markets][-1][:closestDate]).to eq('August 07, 2020')
+    expect(markets[:data][:marketsByCoords][:markets][0][:distance].round(2)).to eq(267.62)
+    expect(markets[:data][:marketsByCoords][:markets][-1][:distance].round(2)).to eq(266.63)
+  end
+  it 'can filter MarketsByCity by date' do
+    post('/', params: { query: 'query { marketsByCity(city: "Dayton", state: "Ohio", radius: 200, date: "8/01/2020") { markets { marketname distance closestDate } } }'})
+    markets = JSON.parse(response.body, symbolize_names: true)
+
+    expect(markets[:data][:marketsByCity][:markets].size).to eq(2)
+    expect(markets[:data][:marketsByCity][:markets][0][:closestDate]).to eq('August 01, 2020')
+    expect(markets[:data][:marketsByCity][:markets][-1][:closestDate]).to eq('August 06, 2020')
+    expect(markets[:data][:marketsByCity][:markets][0][:distance].round(2)).to eq(170.59)
+    expect(markets[:data][:marketsByCity][:markets][-1][:distance].round(2)).to eq(104.47)
+  end
+  it 'can return season dates for each market' do
+    post('/', params: { query: 'query { marketsByDate(date: "8/01/2020") { marketname closestDate seasonDates } }'})
+    markets = JSON.parse(response.body, symbolize_names: true)
+    market = markets[:data][:marketsByDate].find {|market| market[:marketname] == "61st Street Farmers Market"}
+
+    expect(market[:seasonDates]).to eq("05/12/2020 to 12/15/2020, Sat: 9:00 AM-2:00 PM;")
   end
 end

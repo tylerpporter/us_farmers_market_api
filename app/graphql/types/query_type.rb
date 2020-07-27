@@ -20,8 +20,9 @@ module Types
       argument :lng, Float, required: true
       argument :radius, Integer, required: true
       argument :products, [GraphQL::Types::String], required: false
+      argument :date, String, required: false
     end
-    def markets_by_coords(lat:, lng:, radius:, products: '')
+    def markets_by_coords(lat:, lng:, radius:, products: '', date: '')
       markets = Market.near([lat, lng], radius)
       if !products.empty?
         markets = markets.joins(:products)
@@ -29,6 +30,7 @@ module Types
                          .group('markets.id')
                          .having('count(distinct products.id) = ?', products.size)
       end
+      markets = markets.order_by_closest_date(date) if !date.empty?
       location_object = Geocoder.search([lat, lng]).first
       location = location_object.city + ', ' + location_object.state
       { markets: markets,
@@ -42,8 +44,9 @@ module Types
       argument :state, String, required: true
       argument :radius, Integer, required: true
       argument :products, [GraphQL::Types::String], required: false
+      argument :date, String, required: false
     end
-    def markets_by_city(city:, state:, radius:, products: '')
+    def markets_by_city(city:, state:, radius:, products: '', date: '')
       markets = Market.near("#{city}, #{state}", radius)
       if !products.empty?
         markets = markets.joins(:products)
@@ -51,11 +54,20 @@ module Types
                          .group('markets.id')
                          .having('count(distinct products.id) = ?', products.size)
       end
+      markets = markets.order_by_closest_date(date) if !date.empty?
       coords = Geocoder.search("#{city}, #{state}").first.coordinates
       { markets: markets,
         latitude: coords.first,
         longitude: coords.last
       }
+    end
+
+    # Return markets by date
+    field :markets_by_date, [Types::MarketType], null: false do
+      argument :date, String, required: true
+    end
+    def markets_by_date(date:)
+      Market.order_by_closest_date(date)
     end
   end
 end
