@@ -110,4 +110,11 @@ describe "Market Queries" do
     expect(markets[:data][:marketsByCity][:markets][0][:distance].round(2)).to eq(170.59)
     expect(markets[:data][:marketsByCity][:markets][-1][:distance].round(2)).to eq(104.47)
   end
+  it 'can return season dates for each market' do
+    post('/', params: { query: 'query { marketsByDate(date: "8/01/2020") { marketname closestDate seasonDates } }'})
+    markets = JSON.parse(response.body, symbolize_names: true)
+    market = markets[:data][:marketsByDate].find {|market| market[:marketname] == "61st Street Farmers Market"}
+
+    expect(market[:seasonDates]).to eq("05/12/2020 to 12/15/2020, Sat: 9:00 AM-2:00 PM;")
+  end
 end
