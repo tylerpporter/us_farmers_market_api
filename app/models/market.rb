@@ -12,7 +12,7 @@ class Market < ApplicationRecord
       market.season1time.nil? ||
       ("0".."1").exclude?(market.season1date.first) ||
       ("0".."1").exclude?(market.season1date.split(" ").last.first) ||
-      market.closest_date_obj(date).nil?
+      market.season1date.split(" ").size == 1
     end
     filtered.each do |market|
       market.class_eval do
@@ -20,11 +20,14 @@ class Market < ApplicationRecord
       end
     end
     filtered.each { |market| market.closest_date = market.closest_date_formatted(date) }
+    filtered = filtered.reject {|market| market.closest_date == 'None'}
     filtered.sort_by { |market| market.closest_date_obj(date) }
   end
 
   def closest_date_formatted(date)
-    closest_date_obj(date).to_formatted_s(:long)
+    date_obj = closest_date_obj(date)
+    return 'None' if date_obj == 'None'
+    date_obj.to_formatted_s(:long)
   end
 
   def market_dates
