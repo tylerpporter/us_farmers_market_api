@@ -6,7 +6,6 @@ addons:
   chrome: stable
 dist: xenial
 before_install:
-  - export TZ=Mountain/Standard
   - yes | gem update --system --force
   - gem install bundler
 script:
