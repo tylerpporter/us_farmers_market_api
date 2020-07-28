@@ -17,8 +17,8 @@ module Types
     field :latitude, Float, null: true
     field :longitude, Float, null: true
     field :products, [Types::ProductType], null: false
-    field :distance, Float, null: true
-    field :closest_date, String, null: true
+    field :distance, Float, "The market's distance away in miles from the request location.", null: true
+    field :closest_date, String, "The market's closest open date to the request date.", null: true
     field :season_dates, String, null: false
   end
 end

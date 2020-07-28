@@ -10,8 +10,6 @@ gem 'faraday'
 gem 'figaro'
 gem 'geocoder'
 
-
-
 group :development, :test do
   gem 'rspec-rails'
   gem 'pry'
