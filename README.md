@@ -18,6 +18,7 @@
 - [Contributors](#contributors)
 ***
 ## Running Locally
+[top](#table-of-contents)
 - Setup - Run all commands in Terminal from the project root folder
   - Fork and clone this repo
   - Run `bundle install`
@@ -35,6 +36,8 @@
 
 ***
 ## Queries
+[top](#table-of-contents)
+
 The root path for all queries is `https://us-farmers-markets-api.herokuapp.com/` using the `POST` verb. If running locally, use `localhost:3000/graphiql`.
 ***
 ### allMarkets
@@ -79,6 +82,8 @@ Response:
   }
 }
 ```
+[Queries](#queries)
+
 ### market
 Retrieves a single market based on `id`.
 
@@ -113,6 +118,8 @@ Response:
   }
 }
 ```
+[Queries](#queries)
+
 ### marketsByCoords
 Retrieves markets within `x` radius of `lat`, `lng`. Optional arguments include `products` and `date`.
 - `products` takes an array of strings where each string is a product offering to filter the returning markets by
@@ -240,6 +247,8 @@ Response:
   }
 }
 ```
+[Queries](#queries)
+
 ### marketsByCity
 Retrieves markets within `x` radius of `city`, `state`.
 Optional arguments include `products` and `date`.
@@ -300,6 +309,8 @@ Response:
   }
 }
 ```
+[Queries](#queries)
+
 ### marketsByDate
 Retrieves markets nearest a given `date`.
 
@@ -344,8 +355,11 @@ Response:
   }
 }
 ```
+[Queries](#queries)
+
 ***
 ## Tech Stack
+[top](#table-of-contents)
 * Ruby 2.5.3
 * Rails 5.2.4
 * GraphQL
@@ -354,6 +368,7 @@ Response:
 
 ***
 ## Contributors
+[top](#table-of-contents)
 * [Tyler Porter](https://github.com/tylerpporter)
 * [Zach Holcomb](https://github.com/zachholcomb)
 * [Colin Alexander](https://github.com/coloniusrex)
