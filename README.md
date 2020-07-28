@@ -41,6 +41,8 @@
 The root path for all queries is `https://us-farmers-markets-api.herokuapp.com/` using the `POST` verb. If running locally, use `localhost:3000/graphiql`.
 ***
 ### allMarkets
+[queries](#queries)
+
 Retrieves all USDA registered farmers markets.
 
 Optional market return attributes (must include at least 1):
@@ -83,7 +85,7 @@ Response:
 }
 ```
 ### market
-[Queries](#queries)
+[queries](#queries)
 
 Retrieves a single market based on `id`.
 
@@ -119,7 +121,7 @@ Response:
 }
 ```
 ### marketsByCoords
-[Queries](#queries)
+[queries](#queries)
 
 Retrieves markets within `x` radius of `lat`, `lng`. Optional arguments include `products` and `date`.
 - `products` takes an array of strings where each string is a product offering to filter the returning markets by
@@ -248,7 +250,7 @@ Response:
 }
 ```
 ### marketsByCity
-[Queries](#queries)
+[queries](#queries)
 
 Retrieves markets within `x` radius of `city`, `state`.
 Optional arguments include `products` and `date`.
@@ -310,7 +312,7 @@ Response:
 }
 ```
 ### marketsByDate
-[Queries](#queries)
+[queries](#queries)
 
 Retrieves markets nearest a given `date`.
 
