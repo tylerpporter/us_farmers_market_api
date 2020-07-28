@@ -18,7 +18,7 @@
 - [Contributors](#contributors)
 ***
 ## Running Locally
-[top](#table-of-contents)
+[top](#us-farmers-markets-api)
 - Setup - Run all commands in Terminal from the project root folder
   - Fork and clone this repo
   - Run `bundle install`
@@ -36,7 +36,7 @@
 
 ***
 ## Queries
-[top](#table-of-contents)
+[top](#us-farmers-markets-api)
 
 The root path for all queries is `https://us-farmers-markets-api.herokuapp.com/` using the `POST` verb. If running locally, use `localhost:3000/graphiql`.
 ***
@@ -82,9 +82,9 @@ Response:
   }
 }
 ```
+### market
 [Queries](#queries)
 
-### market
 Retrieves a single market based on `id`.
 
 Optional market return attributes (must include at least 1):
@@ -118,9 +118,9 @@ Response:
   }
 }
 ```
+### marketsByCoords
 [Queries](#queries)
 
-### marketsByCoords
 Retrieves markets within `x` radius of `lat`, `lng`. Optional arguments include `products` and `date`.
 - `products` takes an array of strings where each string is a product offering to filter the returning markets by
 - `date` takes a single date and returns markets sorted by the nearest matching date
@@ -247,9 +247,9 @@ Response:
   }
 }
 ```
+### marketsByCity
 [Queries](#queries)
 
-### marketsByCity
 Retrieves markets within `x` radius of `city`, `state`.
 Optional arguments include `products` and `date`.
 - `products` takes an array of strings where each string is a product offering to filter the returning markets by
@@ -309,9 +309,9 @@ Response:
   }
 }
 ```
+### marketsByDate
 [Queries](#queries)
 
-### marketsByDate
 Retrieves markets nearest a given `date`.
 
 Optional market return attributes (must include at least 1):
@@ -355,11 +355,9 @@ Response:
   }
 }
 ```
-[Queries](#queries)
-
 ***
 ## Tech Stack
-[top](#table-of-contents)
+[top](#us-farmers-markets-api)
 * Ruby 2.5.3
 * Rails 5.2.4
 * GraphQL
@@ -368,7 +366,7 @@ Response:
 
 ***
 ## Contributors
-[top](#table-of-contents)
+[top](#us-farmers-markets-api)
 * [Tyler Porter](https://github.com/tylerpporter)
 * [Zach Holcomb](https://github.com/zachholcomb)
 * [Colin Alexander](https://github.com/coloniusrex)
