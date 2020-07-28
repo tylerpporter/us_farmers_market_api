@@ -8,13 +8,21 @@ class MarketDate
   end
 
   def get_dates
-    (start_date..end_date).select do |date|
+    if day_started.to_time > day_ended.to_time
+      start_day, end_day = day_ended, day_started
+    else
+      start_day, end_day = day_started, day_ended
+    end
+    (start_day..end_day).select do |date|
       dow = day_of_week(date)
       date.public_send(dow) if dow != nil
     end
   end
 
   def find_closest(req_date)
+    if future_dates(req_date).empty?
+      return 'None'
+    end
     future_dates(req_date).sort_by do |date|
       date.to_time - date_obj(req_date).to_time
     end.first
@@ -42,15 +50,17 @@ class MarketDate
     @season1time.split(";").map { |times| times.split(":") }.map(&:first)
   end
 
-  def start_date
+  def day_started
     date= @season1date.split(" ").first
     date[-4..-1] = Time.current.year.to_s
+    date.gsub!("31", "30")
     date_obj(date)
   end
 
-  def end_date
+  def day_ended
     date = @season1date.split(" ").last
     date[-4..-1] = Time.current.year.to_s
+    date.gsub!("31", "30")
     date_obj(date)
   end
 end
