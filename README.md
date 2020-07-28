@@ -355,6 +355,5 @@ Response:
 * [Tyler Porter](https://github.com/tylerpporter)
 * [Zach Holcomb](https://github.com/zachholcomb)
 * [Colin Alexander](https://github.com/coloniusrex)
-* ...
 ![DevelopmentTeam](app/assets/images/team_index_USFM_api.png)
 
