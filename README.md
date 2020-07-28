@@ -132,7 +132,6 @@ Optional return attributes (must include at least 1):
   - `zip`
 - `location` (`city`, `state` for request `lat`, `lng`)
 
-
 Request:
 ```
 query {
@@ -356,3 +355,6 @@ Response:
 * [Tyler Porter](https://github.com/tylerpporter)
 * [Zach Holcomb](https://github.com/zachholcomb)
 * [Colin Alexander](https://github.com/coloniusrex)
+* ...
+![DevelopmentTeam](app/assets/images/team_index_USFM_api.png)
+
