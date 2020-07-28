@@ -9,6 +9,7 @@ gem 'graphql'
 gem 'faraday'
 gem 'figaro'
 gem 'geocoder'
+gem 'simplecov-shield'
 
 group :development, :test do
   gem 'rspec-rails'
