@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/tylerpporter/us_farmers_market_api.svg?branch=master)](https://travis-ci.com/tylerpporter/us_farmers_market_api)
+
 # US Farmers Markets API
 
 *This [GraphQL](https://graphql.org/) API was created to replace the current [USDA National Farmers Market Directory API](https://search.ams.usda.gov/farmersmarkets/v1/svcdesc.html).*
