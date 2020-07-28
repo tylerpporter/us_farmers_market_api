@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.com/tylerpporter/us_farmers_market_api.svg?branch=master)](https://travis-ci.com/tylerpporter/us_farmers_market_api)
-
-[![Coverage Status](https://img.shields.io/coveralls/aterris/simplecov-shield.svg)](https://coveralls.io/r/aterris/simplecov-shield?branch=master)
+[![Build Status](https://travis-ci.com/tylerpporter/us_farmers_market_api.svg?branch=master)](https://travis-ci.com/tylerpporter/us_farmers_market_api)[![Coverage Status](https://img.shields.io/coveralls/aterris/simplecov-shield.svg)](https://coveralls.io/r/aterris/simplecov-shield?branch=master)
 
 # US Farmers Markets API
 
