@@ -66,5 +66,12 @@ module Types
     def markets_by_date(date:)
       Market.order_by_closest_date(date)
     end
+
+    field :markets, [Types::MarketType], "Retrieves markets based on fmid.", null: false do
+      argument :fmids, [Integer], "Format: [1018261, 1018318]", required: true
+    end
+    def markets(fmids:)
+      Market.where(fmid: fmids)
+    end
   end
 end
