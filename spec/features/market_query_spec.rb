@@ -117,4 +117,13 @@ describe "Market Queries" do
 
     expect(market[:seasonDates]).to eq("05/12/2020 to 12/15/2020, Sat: 9:00 AM-2:00 PM;")
   end
+  it 'can return specific markets based on fmid' do
+    post('/', params: { query: 'query { markets(fmids: [1018261, 1018318]) { marketname fmid} }'})
+    markets = JSON.parse(response.body, symbolize_names: true)
+
+    expect(markets[:data][:markets].size).to eq(2)
+    expect(markets[:data][:markets].first[:fmid]).to eq(1018261)
+    expect(markets[:data][:markets].first[:marketname]).to eq("Caledonia Farmers Market Association - Danville")
+    expect(markets[:data][:markets].last[:fmid]).to eq(1018318)
+  end
 end
